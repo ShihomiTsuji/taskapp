@@ -17,12 +17,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2uV-gh-NWJ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="158" width="414" height="704"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <datePicker key="tableFooterView" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="w3n-uN-1q3">
-                                    <rect key="frame" x="0.0" y="111.5" width="414" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                </datePicker>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="wMT-Sd-Dwf" detailTextLabel="yj9-2H-KLn" style="IBUITableViewCellStyleSubtitle" id="vYu-Vn-fLT">
                                         <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
@@ -50,14 +46,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Tcf-gN-1r4">
+                                <rect key="frame" x="0.0" y="88" width="414" height="60"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2uV-gh-NWJ" secondAttribute="trailing" id="Gdj-cH-Vpw"/>
                             <constraint firstItem="2uV-gh-NWJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gjg-aV-0m4"/>
+                            <constraint firstItem="2uV-gh-NWJ" firstAttribute="top" secondItem="Tcf-gN-1r4" secondAttribute="bottom" constant="10" id="LgY-aW-3Nq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2uV-gh-NWJ" secondAttribute="bottom" id="MLv-q1-SEU"/>
-                            <constraint firstItem="2uV-gh-NWJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VSo-73-wDG"/>
+                            <constraint firstItem="Tcf-gN-1r4" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RdW-up-Jny"/>
+                            <constraint firstItem="Tcf-gN-1r4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TKi-gb-gbS"/>
+                            <constraint firstItem="Tcf-gN-1r4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VfH-oN-qoK"/>
+                            <constraint firstItem="2uV-gh-NWJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="70" id="coi-7a-Knl"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q9f-Lr-cHS">
@@ -68,6 +72,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="Tcf-gN-1r4" id="15f-sx-t46"/>
                         <outlet property="tableView" destination="2uV-gh-NWJ" id="VAs-PN-TjB"/>
                         <segue destination="Uio-7Y-HmQ" kind="show" identifier="cellSegue" id="dqc-if-oqe"/>
                     </connections>
