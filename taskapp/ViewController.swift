@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
     }
     
     //データの数を返すメソッド
@@ -50,6 +51,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let dateString:String = formatter.string(from: task.date)
         cell.detailTextLabel?.text = dateString
         
+        let categoryLabel = cell.viewWithTag(1) as! UILabel
+        categoryLabel.text = task.category
+        
         return cell
     }
     
@@ -57,6 +61,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         performSegue(withIdentifier: "cellSegue", sender: nil)
         
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //キーボードを閉じるz
+        view.endEditing(true)
+        //検索ワードがnilでなければ検索を実施
+        if let searchText = self.searchBar.text {
+            //print(searchText)
+            var taskArray2 = realm.objects(Task.self).filter("category BEGINSWITH %@", searchText)
+            print(taskArray2)
+        }
     }
  
     //セルが削除可能なことを伝えるメソッド
