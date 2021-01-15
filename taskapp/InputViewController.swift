@@ -9,19 +9,27 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class InputViewController: UIViewController {
+class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var categoryPickerView: UIPickerView!
+    
     
     let realm = try! Realm()
     var task: Task!
+    var category: Category!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //pickerViewのデリゲート
+        categoryPickerView.delegate = self
+        categoryPickerView.dataSource = self
+        
         //背景をタップ時dismisskeyboardメソッドを呼び出し
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
@@ -29,7 +37,9 @@ class InputViewController: UIViewController {
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         datePicker.date = task.date
-        categoryTextField.text = task.category
+//pickerViewに変更
+        categoryTextField.text = category.categoryName
+        contentsTextView.layer.borderColor = UIColor.black.cgColor
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,7 +47,8 @@ class InputViewController: UIViewController {
             self.task.title = self.titleTextField.text!
             self.task.contents = self.contentsTextView.text!
             self.task.date = self.datePicker.date
-            self.task.category = self.categoryTextField.text!
+//以下の行要修正
+            self.task.category_id = self.categoryTextField.text!
             self.realm.add(self.task, update: .modified)
         }
         
@@ -89,6 +100,28 @@ class InputViewController: UIViewController {
         view.endEditing(true)
     }
     
+    //カテゴリーのリスト
+    var categoryArray = try! Realm().objects(Category.self).sorted(byKeyPath: "category_id", ascending: true)
+    
+    //categoryPickerViewの列数
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    //categoryPickerViewの行数、リストの数
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categoryArray.count
+    }
+    
+    //categoryPickerViewの最初の表示
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return categoryArray???
+    }
+    
+    //UIPickerViewのRowが選択された時の挙動
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        <#code#>
+    }
 
     /*
     // MARK: - Navigation

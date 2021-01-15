@@ -125,9 +125,9 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sIa-a3-gzR">
-                                <rect key="frame" x="0.0" y="409" width="414" height="120"/>
+                                <rect key="frame" x="0.0" y="450" width="414" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="xaH-oP-t3C"/>
+                                    <constraint firstAttribute="height" constant="30" id="LPY-v0-5me"/>
                                 </constraints>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhx-Fw-tg5">
@@ -141,14 +141,42 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="リマインド" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjs-Yu-M7M">
+                                <rect key="frame" x="10" y="419" width="394" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLV-WB-i2h">
+                                <rect key="frame" x="5" y="768" width="108" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="カテゴリー作成"/>
+                                <connections>
+                                    <segue destination="JXv-qT-PB4" kind="show" id="fHR-5S-nR2"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsM-kg-gzX">
+                                <rect key="frame" x="10" y="531" width="414" height="216"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uQ-u7-vxU">
+                                <rect key="frame" x="10" y="500" width="394" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QhH-dV-dwo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="qsM-kg-gzX" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="1vD-uR-PIw"/>
+                            <constraint firstItem="qsM-kg-gzX" firstAttribute="trailing" secondItem="QhH-dV-dwo" secondAttribute="trailing" constant="10" id="2jM-O5-r3k"/>
                             <constraint firstItem="eGQ-rW-SPu" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="5up-DF-YVm"/>
+                            <constraint firstItem="kjs-Yu-M7M" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="7xH-zv-vrs"/>
                             <constraint firstItem="fIk-GR-1ED" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="Cpm-B1-fW0"/>
+                            <constraint firstItem="8uQ-u7-vxU" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="Cpn-EH-LSJ"/>
                             <constraint firstItem="Y3b-xK-cot" firstAttribute="top" secondItem="fIk-GR-1ED" secondAttribute="bottom" constant="10" id="FEu-1J-Ak2"/>
                             <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="eGQ-rW-SPu" secondAttribute="trailing" constant="10" id="G6d-oU-yOo"/>
+                            <constraint firstItem="8uQ-u7-vxU" firstAttribute="top" secondItem="sIa-a3-gzR" secondAttribute="bottom" constant="20" id="IZ7-yG-VQc"/>
                             <constraint firstItem="fIk-GR-1ED" firstAttribute="top" secondItem="eGQ-rW-SPu" secondAttribute="bottom" constant="10" id="UMp-sJ-gQG"/>
                             <constraint firstItem="UMK-JJ-Byo" firstAttribute="top" secondItem="QhH-dV-dwo" secondAttribute="top" constant="10" id="Wzh-9A-XIn"/>
                             <constraint firstItem="Y3b-xK-cot" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="XEb-Au-e3l"/>
@@ -156,20 +184,25 @@
                             <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="UMK-JJ-Byo" secondAttribute="trailing" constant="10" id="Ydt-uS-CWj"/>
                             <constraint firstItem="sIa-a3-gzR" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" id="Yhd-Dl-N4q"/>
                             <constraint firstItem="UMK-JJ-Byo" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="ZQb-Ym-Pjn"/>
+                            <constraint firstItem="sIa-a3-gzR" firstAttribute="top" secondItem="kjs-Yu-M7M" secondAttribute="bottom" constant="10" id="aZu-Zz-ycs"/>
                             <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="fIk-GR-1ED" secondAttribute="trailing" constant="10" id="axA-MN-nkc"/>
                             <constraint firstItem="uhx-Fw-tg5" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="ddD-he-xqF"/>
-                            <constraint firstItem="sIa-a3-gzR" firstAttribute="top" secondItem="Y3b-xK-cot" secondAttribute="bottom" constant="10" id="gdm-Nz-gzp"/>
+                            <constraint firstItem="kjs-Yu-M7M" firstAttribute="top" secondItem="Y3b-xK-cot" secondAttribute="bottom" constant="20" id="e5X-cU-8uY"/>
+                            <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="8uQ-u7-vxU" secondAttribute="trailing" constant="10" id="gCb-tl-erd"/>
                             <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="bVb-ug-O1r" secondAttribute="trailing" constant="10" id="iZB-f8-7Q5"/>
                             <constraint firstItem="bVb-ug-O1r" firstAttribute="top" secondItem="UMK-JJ-Byo" secondAttribute="bottom" constant="10" id="jlg-5h-lo3"/>
                             <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="uhx-Fw-tg5" secondAttribute="trailing" constant="10" id="jrT-cO-Mde"/>
                             <constraint firstItem="bVb-ug-O1r" firstAttribute="leading" secondItem="QhH-dV-dwo" secondAttribute="leading" constant="10" id="mKe-gV-rQ5"/>
+                            <constraint firstItem="qsM-kg-gzX" firstAttribute="top" secondItem="8uQ-u7-vxU" secondAttribute="bottom" constant="10" id="r5b-a3-1PI"/>
                             <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="Y3b-xK-cot" secondAttribute="trailing" constant="10" id="t0G-Ml-G2B"/>
                             <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="sIa-a3-gzR" secondAttribute="trailing" id="uoo-JM-pmh"/>
                             <constraint firstItem="eGQ-rW-SPu" firstAttribute="top" secondItem="uhx-Fw-tg5" secondAttribute="bottom" constant="10" id="wZQ-K3-pdl"/>
+                            <constraint firstItem="QhH-dV-dwo" firstAttribute="trailing" secondItem="kjs-Yu-M7M" secondAttribute="trailing" constant="10" id="wjy-NV-aiG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cN4-1u-ofl"/>
                     <connections>
+                        <outlet property="categoryPickerView" destination="qsM-kg-gzX" id="gKu-9n-uo3"/>
                         <outlet property="categoryTextField" destination="eGQ-rW-SPu" id="9bc-Us-Y5F"/>
                         <outlet property="contentsTextView" destination="Y3b-xK-cot" id="w38-tO-d8a"/>
                         <outlet property="datePicker" destination="sIa-a3-gzR" id="EyX-Ka-SzO"/>
@@ -179,6 +212,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ma-B9-dUj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1711.5942028985507" y="89.732142857142847"/>
+        </scene>
+        <!--Category View Controller-->
+        <scene sceneID="Gh6-bZ-Dd8">
+            <objects>
+                <viewController id="JXv-qT-PB4" customClass="CategoryViewController" customModule="taskapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DSP-Sa-Wpe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBM-IG-cKM">
+                                <rect key="frame" x="20" y="108" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kWK-GO-GVD">
+                                <rect key="frame" x="20" y="139" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="czG-o0-LZx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kWK-GO-GVD" firstAttribute="leading" secondItem="czG-o0-LZx" secondAttribute="leading" constant="20" id="7zJ-nv-Ryg"/>
+                            <constraint firstItem="kWK-GO-GVD" firstAttribute="top" secondItem="lBM-IG-cKM" secondAttribute="bottom" constant="10" id="ArL-Xs-pPT"/>
+                            <constraint firstItem="lBM-IG-cKM" firstAttribute="leading" secondItem="czG-o0-LZx" secondAttribute="leading" constant="20" id="BvC-Hh-uys"/>
+                            <constraint firstItem="czG-o0-LZx" firstAttribute="trailing" secondItem="lBM-IG-cKM" secondAttribute="trailing" constant="20" id="KKv-ss-PHH"/>
+                            <constraint firstItem="lBM-IG-cKM" firstAttribute="top" secondItem="czG-o0-LZx" secondAttribute="top" constant="20" id="hNM-AU-r6Q"/>
+                            <constraint firstItem="czG-o0-LZx" firstAttribute="trailing" secondItem="kWK-GO-GVD" secondAttribute="trailing" constant="20" id="sy5-N0-Kmr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5x9-0d-3Qb"/>
+                    <connections>
+                        <outlet property="categoryTextField" destination="kWK-GO-GVD" id="dYI-UE-fkV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WUG-Ah-6qG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2447" y="90"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gEh-Hw-Xqf">

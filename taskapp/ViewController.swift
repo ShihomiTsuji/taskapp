@@ -22,6 +22,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 日付の近い順でソート：昇順
     // 以降内容をアップデートするとリスト内は自動的に更新される。
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+    
+    var searchResults = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +31,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
+        //検索バーの詳細設定
+        searchBar.placeholder = "カテゴリー検索"
+        //遷移先の保存ボタン
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: nil, action: nil)
     }
     
     //データの数を返すメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
+        if searchBar.text != "" {
+            return searchResults.count
+        } else {
+            return taskArray.count
+        }
     }
 
     //各セルの内容を返すメソッド
@@ -41,18 +51,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //再利用可能なcellを得る
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        //cellに値を設定する。
-        let task  = taskArray[indexPath.row]
-        cell.textLabel?.text = task.title
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        
-        let dateString:String = formatter.string(from: task.date)
-        cell.detailTextLabel?.text = dateString
-        
-        let categoryLabel = cell.viewWithTag(1) as! UILabel
-        categoryLabel.text = task.category
+        if searchBar.text != "" {
+            //cellに値を設定する。
+            let task  = searchResults[indexPath.row]
+            cell.textLabel?.text = task.title
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            
+            let dateString:String = formatter.string(from: task.date)
+            cell.detailTextLabel?.text = dateString
+            
+            let categoryLabel = cell.viewWithTag(1) as! UILabel
+            categoryLabel.text = task.category
+            
+        } else {
+            //cellに値を設定する。
+            let task  = taskArray[indexPath.row]
+            cell.textLabel?.text = task.title
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            
+            let dateString:String = formatter.string(from: task.date)
+            cell.detailTextLabel?.text = dateString
+            
+            let categoryLabel = cell.viewWithTag(1) as! UILabel
+            categoryLabel.text = task.category
+        }
         
         return cell
     }
@@ -64,13 +90,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //キーボードを閉じるz
+        //キーボードを閉じる
         view.endEditing(true)
         //検索ワードがnilでなければ検索を実施
         if let searchText = self.searchBar.text {
             //print(searchText)
-            var taskArray2 = realm.objects(Task.self).filter("category BEGINSWITH %@", searchText)
-            print(taskArray2)
+            searchResults = realm.objects(Task.self).filter("category == %@", searchText)
+            self.tableView.reloadData()
         }
     }
  
@@ -129,6 +155,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-
+    
+    //検索バーにキャンセルボタンを表示
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if !searchBar.showsCancelButton {
+            searchBar.showsCancelButton = true
+        }
+    }
+    
+    //キャンセルボタン押下時に検索前のデータを表示
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        self.view.endEditing(true)
+        searchBar.text = ""
+        self.tableView.reloadData()
+    }
 }
+
 
