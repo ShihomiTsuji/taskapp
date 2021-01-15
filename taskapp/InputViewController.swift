@@ -21,6 +21,9 @@ class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     var task: Task!
     var category: Category!
     
+    //pickerViewで選択するカテゴリー情報を保持
+    var selectedCategory: Category!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,8 +40,7 @@ class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         datePicker.date = task.date
-//pickerViewに変更
-        categoryTextField.text = category.categoryName
+        categoryTextField.text = category?.categoryName
         contentsTextView.layer.borderColor = UIColor.black.cgColor
     }
 
@@ -47,8 +49,7 @@ class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
             self.task.title = self.titleTextField.text!
             self.task.contents = self.contentsTextView.text!
             self.task.date = self.datePicker.date
-//以下の行要修正
-            self.task.category_id = self.categoryTextField.text!
+            self.task.category = self.selectedCategory!
             self.realm.add(self.task, update: .modified)
         }
         
@@ -115,12 +116,22 @@ class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     //categoryPickerViewの最初の表示
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categoryArray???
+        return categoryArray[row].categoryName
     }
     
     //UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        <#code#>
+        self.selectedCategory = categoryArray[row]
+    }
+    
+    //categoryViewController遷移時にcategoryプロパティを受け渡し
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let category = Category()
+        let allCategory = realm.objects(Category.self)
+        if allCategory.count != 0 {
+            category.category_id = allCategory.max(ofProperty: "category_id")! + 1
+        }
+        
     }
 
     /*

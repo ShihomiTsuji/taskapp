@@ -63,7 +63,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.detailTextLabel?.text = dateString
             
             let categoryLabel = cell.viewWithTag(1) as! UILabel
-            categoryLabel.text = task.category
+            categoryLabel.text = task.category.categoryName
             
         } else {
             //cellに値を設定する。
@@ -77,7 +77,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.detailTextLabel?.text = dateString
             
             let categoryLabel = cell.viewWithTag(1) as! UILabel
-            categoryLabel.text = task.category
+            categoryLabel.text = task.category.categoryName
         }
         
         return cell

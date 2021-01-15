@@ -13,7 +13,7 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var categoryTextField: UITextField!
     
     let realm = try! Realm()
-    var category:Category!
+    var category: Category!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,7 @@ class CategoryViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         try! realm.write{
             self.category.categoryName = categoryTextField.text!
+            self.realm.add(self.category, update: .modified)
         }
     }
 
