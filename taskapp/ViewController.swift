@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //Realmインスタンスを取得
     let realm = try! Realm()
+    var category: Category!
     
     //DB内のタスクが格納されるリスト。
     // 日付の近い順でソート：昇順
@@ -35,6 +36,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchBar.placeholder = "カテゴリー検索"
         //遷移先の保存ボタン
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: nil, action: nil)
+        
+        //カテゴリー未登録時の「カテゴリーなし」の設定
+        if category == nil {
+            let category = Category()
+            try! realm.write {
+            category.category_id = 1
+            category.categoryName = "カテゴリーなし"
+            self.realm.add(category, update: .modified)
+            }
+        }
     }
     
     //データの数を返すメソッド
@@ -95,7 +106,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //検索ワードがnilでなければ検索を実施
         if let searchText = self.searchBar.text {
             //print(searchText)
-            searchResults = realm.objects(Task.self).filter("category == %@", searchText)
+            searchResults = realm.objects(Task.self).filter("category.categoryName == %@", searchText)
             self.tableView.reloadData()
         }
     }
@@ -170,6 +181,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         searchBar.text = ""
         self.tableView.reloadData()
     }
+    
 }
 
 

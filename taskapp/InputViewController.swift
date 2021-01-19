@@ -11,7 +11,6 @@ import UserNotifications
 
 class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var contentsTextView: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var categoryPickerView: UIPickerView!
@@ -40,11 +39,20 @@ class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         datePicker.date = task.date
-        categoryTextField.text = category?.categoryName
         contentsTextView.layer.borderColor = UIColor.black.cgColor
+                
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        categoryPickerView.reloadAllComponents()
+        
+        //categoryPickerViewの初期値
+        self.categoryPickerView.selectRow(task.category.category_id - 1, inComponent: 0, animated: false)
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        selectedCategory = categoryArray[categoryPickerView.selectedRow(inComponent: 0)]
         try! realm.write {
             self.task.title = self.titleTextField.text!
             self.task.contents = self.contentsTextView.text!
@@ -126,14 +134,16 @@ class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     //categoryViewController遷移時にcategoryプロパティを受け渡し
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let categoryViewController:CategoryViewController = segue.destination as! CategoryViewController
         let category = Category()
         let allCategory = realm.objects(Category.self)
         if allCategory.count != 0 {
             category.category_id = allCategory.max(ofProperty: "category_id")! + 1
         }
+        categoryViewController.category = category
         
     }
-
+        
     /*
     // MARK: - Navigation
 
