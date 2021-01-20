@@ -23,6 +23,9 @@ class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     //pickerViewで選択するカテゴリー情報を保持
     var selectedCategory: Category!
     
+    //ViewControllerで渡されてきたcategory情報を保持
+    var categoryInfo: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,9 +49,10 @@ class InputViewController: UIViewController, UIPickerViewDataSource, UIPickerVie
     override func viewDidAppear(_ animated: Bool) {
         categoryPickerView.reloadAllComponents()
         
-        //categoryPickerViewの初期値
-        self.categoryPickerView.selectRow(task.category.category_id - 1, inComponent: 0, animated: false)
-
+        if categoryInfo != nil {
+            //categoryPickerViewの初期値
+            self.categoryPickerView.selectRow(task.category.category_id - 1, inComponent: 0, animated: false)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

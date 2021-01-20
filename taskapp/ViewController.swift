@@ -149,6 +149,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "cellSegue" {
             let indexPath = self.tableView.indexPathForSelectedRow
             inputViewController.task = taskArray[indexPath!.row]
+            //タスク入力画面でのカテゴリー初期表示用情報
+            inputViewController.categoryInfo = taskArray[indexPath!.row].category.category_id
         } else {
             let task = Task()
             
